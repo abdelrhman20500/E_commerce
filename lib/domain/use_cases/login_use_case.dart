@@ -1,6 +1,6 @@
-import 'package:e_commerce/data/repo/auth_repo/auth_repo.dart';
+import '../repos/auth_repo/auth_repo.dart';
 
-class LoginUseCase{
+class LoginUseCase {
   AuthRepo repo;
   LoginUseCase(this.repo);
   bool execute(String email, String password){

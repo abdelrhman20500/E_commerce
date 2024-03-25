@@ -1,6 +1,7 @@
-import 'package:e_commerce/data/repo/auth_repo/auth_repo.dart';
+import 'package:e_commerce/domain/use_cases/login_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import '../../../domain/use_cases/base_use_case.dart';
 import '../../uitlis/base_state.dart';
 
 class LoginViewModel extends Cubit{
@@ -9,13 +10,14 @@ class LoginViewModel extends Cubit{
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
- AuthRepo repo= AuthRepo();
-  LoginViewModel():super(BaseInitialState());
+ // AuthRepo repo= AuthRepo();
+ LoginUseCase loginUseCase;
+  LoginViewModel(this.loginUseCase):super(BaseInitialState());
 
   void login() {
     if(! formKey.currentState!.validate()) return;
     emit(BaseLoadingState());
-    repo.login(emailController.text, passwordController.text);
+    loginUseCase.execute(emailController.text, passwordController.text);
   }
 }
 

@@ -1,3 +1,5 @@
+import 'package:e_commerce/domain/repos/auth_repo/auth_repo.dart';
+import 'package:e_commerce/domain/use_cases/login_use_case.dart';
 import 'package:e_commerce/ui/screens/login_screen/login_view_model.dart';
 import 'package:e_commerce/ui/uitlis/base_state.dart';
 import 'package:e_commerce/ui/uitlis/dialogs.dart';
@@ -7,10 +9,22 @@ import 'package:e_commerce/ui/widgets/form_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+import '../../../data/repo/auth_repo_impl/auth_repo_impl.dart';
+
+
+class LoginScreen extends StatefulWidget {
  static String routeName = "LoginScreen";
 
- LoginViewModel viewModel= LoginViewModel();
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+ LoginViewModel viewModel= LoginViewModel(
+   LoginUseCase(AuthRepoImpl())
+ );
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +121,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
